@@ -14,7 +14,7 @@ class EvalItem {
 
 class Range {
   public static of(min: number, max: number): number[] {
-    const arr = Array<number>(0);
+    const arr = Array<number>();
     for (let index = min; index <= max; index++) arr.push(index);
     return arr;
   }
@@ -32,7 +32,7 @@ export default class Evaluation {
   ];
   public comment: Memo[] = [];
 
-  public get sum(): number {
+  public sum(): number {
     let sum = 0;
     this.evalItems.forEach((item: EvalItem) => sum += item.value);
     return sum;
