@@ -30,12 +30,11 @@ export default class Evaluation {
     new EvalItem({ key: '遊びやすさ', value: 1, option: Range.of(1, 10)}),
     new EvalItem({ key: 'その他', value: 1, option: Range.of(0, 10)}),
   ];
-  public comment: string = '';
+  public comment: Memo[] = [];
 
   public get sum(): number {
     let sum = 0;
     this.evalItems.forEach((item: EvalItem) => sum += item.value);
     return sum;
   }
-  public memos: Memo[] = [];
 }
