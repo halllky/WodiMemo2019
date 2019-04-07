@@ -15,13 +15,16 @@
       <li v-for="(c, index) in model.comment" :key="index">
         <textarea v-model="c.text"></textarea>
       </li>
-      <li>add</li>
+      <li>
+        <a @click="addComment">add</a>
+      </li>
     </ul>
   </li>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Evaluation from '../ts/evaluation';
+import Memo from '../ts/memo';
 
 @Component({
   components: {
@@ -29,5 +32,9 @@ import Evaluation from '../ts/evaluation';
 })
 export default class EvalItem extends Vue {
   @Prop() public model!: Evaluation;
+
+  private addComment(index: number): void {
+    this.model.comment.push(new Memo());
+  }
 }
 </script>
