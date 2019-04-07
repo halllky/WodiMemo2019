@@ -1,26 +1,26 @@
 import Game from './game';
 import Memo from './memo';
-
-class EvalItem {
-  constructor(param: { key: string, value: number, option: number[] }) {
-    this.key = param.key;
-    this.value = param.value;
-    this.option = param.option;
-  }
-  key: string;
-  value: number;
-  option: number[];
-}
-
-class Range {
-  public static of(min: number, max: number): number[] {
-    const arr = Array<number>();
-    for (let index = min; index <= max; index++) arr.push(index);
-    return arr;
-  }
-}
+import Range from './range';
+import EvalItem from './eval-item';
 
 export default class Evaluation {
+
+  public static fromJSON(json: string): Evaluation[] | null {
+    try {
+      const arr = JSON.parse(json) as Game[];
+      const res = Array<Evaluation>();
+      arr.forEach((item) => {
+        const ev = new Evaluation();
+        ev.game = item;
+        res.push(ev);
+      });
+      return res;
+    } catch (error) {
+      // error
+      return null;
+    }
+  }
+
   public game: Game = new Game();
   public evalItems: EvalItem[] = [
     new EvalItem({ key: '熱中度', value: 1, option: Range.of(1, 10)}),
