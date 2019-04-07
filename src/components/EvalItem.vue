@@ -1,20 +1,17 @@
 <template>
-  <li>
-    <span>{{ game.name }}</span>
-    <ul>
-      <li v-for="item in items" :key="item.key">
-        {{ item.key }}
-        <select v-model="item.value">
-          <option v-for="i in item.option" :key="i" :value="i" :selected="i === item.value">
-            {{ i }}
-          </option>
-        </select>
-      </li>
-      <li>
-        <span>合計{{ sum() }}</span>
-      </li>
-    </ul>
-  </li>
+  <tr>
+    <th>{{ game.name }}</th>
+    <td v-for="item in items" :key="item.key">
+      <select v-model="item.value">
+        <option v-for="i in item.option" :key="i" :value="i" :selected="i === item.value">
+          {{ i }}
+        </option>
+      </select>
+    </td>
+    <td>
+      <span>合計{{ sum() }}</span>
+    </td>
+  </tr>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';

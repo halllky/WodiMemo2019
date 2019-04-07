@@ -1,11 +1,18 @@
 <template>
   <div>
-    <ul>
-      <li v-for="(item, index) in model" :key="index">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th v-for="item in header.evalItems" :key="item.key">{{ item.key }}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody v-for="(item, index) in model" :key="index">
         <EvalItem :game="item.game" :items="item.evalItems"></EvalItem>
         <EvalComment :model="item.comment"></EvalComment>
-      </li>
-    </ul>
+      </tbody>
+    </table>
   </div>
 </template>
 <script lang="ts">
@@ -22,5 +29,6 @@ import Evaluation from '../ts/evaluation';
 })
 export default class EvalList extends Vue {
   @Prop() public model!: Evaluation[];
+  private header: Evaluation = new Evaluation();
 }
 </script>

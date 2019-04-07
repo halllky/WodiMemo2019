@@ -1,15 +1,18 @@
 <template>
-  <li>
-    <ul>
-      <li v-for="(c, index) in model" :key="index">
-        <span>{{ c.timestamp | asDate }}</span>
-        <StretchableTextarea v-model="c.text"></StretchableTextarea>
-      </li>
-      <li>
-        <a @click="addComment">add</a>
-      </li>
-    </ul>
-  </li>
+  <tr>
+    <th></th>
+    <td colspan="7">
+      <ul>
+        <li v-for="(c, index) in model" :key="index">
+          <span>{{ c.timestamp | asDate }}</span>
+          <StretchableTextarea v-model="c.text"></StretchableTextarea>
+        </li>
+        <li>
+          <a @click="addComment">add</a>
+        </li>
+      </ul>
+    </td>
+  </tr>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
