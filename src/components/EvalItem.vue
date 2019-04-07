@@ -10,6 +10,9 @@
           </option>
         </select>
       </li>
+      <li>
+        <span>合計{{ model.sum() }}</span>
+      </li>
     </ul>
     <ul>
       <li v-for="(c, index) in model.comment" :key="index">
