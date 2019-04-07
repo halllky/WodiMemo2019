@@ -13,6 +13,7 @@
     </ul>
     <ul>
       <li v-for="(c, index) in model.comment" :key="index">
+        <span>{{ c.timestamp | asDate }}</span>
         <StretchableTextarea v-model="c.text"></StretchableTextarea>
       </li>
       <li>
