@@ -31,10 +31,4 @@ export default class Evaluation {
     new EvalItem({ key: 'その他', value: 1, option: Range.of(0, 10)}),
   ];
   public comment: Comment[] = [];
-
-  public sum(): number {
-    let sum = 0;
-    this.evalItems.forEach((item: EvalItem) => sum += item.value);
-    return sum;
-  }
 }

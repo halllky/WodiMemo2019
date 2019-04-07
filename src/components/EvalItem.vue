@@ -1,8 +1,8 @@
 <template>
   <li>
-    <span>{{ model.game.name }}</span>
+    <span>{{ game.name }}</span>
     <ul>
-      <li v-for="item in model.evalItems" :key="item.key">
+      <li v-for="item in items" :key="item.key">
         {{ item.key }}
         <select v-model="item.value">
           <option v-for="i in item.option" :key="i" :value="i" :selected="i === item.value">
@@ -11,16 +11,7 @@
         </select>
       </li>
       <li>
-        <span>合計{{ model.sum() }}</span>
-      </li>
-    </ul>
-    <ul>
-      <li v-for="(c, index) in model.comment" :key="index">
-        <span>{{ c.timestamp | asDate }}</span>
-        <StretchableTextarea v-model="c.text"></StretchableTextarea>
-      </li>
-      <li>
-        <a @click="addComment">add</a>
+        <span>合計{{ sum() }}</span>
       </li>
     </ul>
   </li>
@@ -28,8 +19,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import StretchableTextarea from './StretchableTextarea.vue';
-import Evaluation from '../ts/evaluation';
-import Comment from '../ts/comment';
+import Game from '../ts/game';
+import EvalItemModel from '../ts/eval-item';
 
 @Component({
   components: {
@@ -37,10 +28,13 @@ import Comment from '../ts/comment';
   },
 })
 export default class EvalItem extends Vue {
-  @Prop() public model!: Evaluation;
+  @Prop() public game!: Game;
+  @Prop() public items!: EvalItemModel[];
 
-  private addComment(index: number): void {
-    this.model.comment.push(new Comment());
+  private sum(): number {
+    let sum = 0;
+    this.items.forEach((item) => sum += item.value);
+    return sum;
   }
 }
 </script>
