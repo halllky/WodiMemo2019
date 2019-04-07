@@ -13,7 +13,7 @@
     </ul>
     <ul>
       <li v-for="(c, index) in model.comment" :key="index">
-        <textarea v-model="c.text"></textarea>
+        <StretchableTextarea v-model="c.text"></StretchableTextarea>
       </li>
       <li>
         <a @click="addComment">add</a>
@@ -23,11 +23,13 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import StretchableTextarea from './StretchableTextarea.vue';
 import Evaluation from '../ts/evaluation';
 import Memo from '../ts/memo';
 
 @Component({
   components: {
+    StretchableTextarea,
   },
 })
 export default class EvalItem extends Vue {
