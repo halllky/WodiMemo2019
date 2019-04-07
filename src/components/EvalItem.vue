@@ -4,7 +4,7 @@
     <ul>
       <li v-for="item in model.evalItems" :key="item.key">
         {{ item.key }}
-        <select>
+        <select v-model="item.value">
           <option v-for="i in item.option" :key="i" :value="i" :selected="i === item.value">
             {{ i }}
           </option>
