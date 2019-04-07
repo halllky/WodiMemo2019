@@ -5,7 +5,7 @@
         <tr>
           <th></th>
           <th v-for="item in header.evalItems" :key="item.key">{{ item.key }}</th>
-          <th></th>
+          <th>合計</th>
         </tr>
       </thead>
       <tbody v-for="(item, index) in model" :key="index">

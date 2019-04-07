@@ -9,7 +9,7 @@
       </select>
     </td>
     <td>
-      <span>合計{{ sum() }}</span>
+      <span>{{ sum() }}</span>
     </td>
   </tr>
 </template>
