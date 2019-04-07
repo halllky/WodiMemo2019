@@ -1,5 +1,5 @@
 import Game from './game';
-import Memo from './memo';
+import Comment from './comment';
 import Range from './range';
 import EvalItem from './eval-item';
 
@@ -30,7 +30,7 @@ export default class Evaluation {
     new EvalItem({ key: '遊びやすさ', value: 1, option: Range.of(1, 10)}),
     new EvalItem({ key: 'その他', value: 1, option: Range.of(0, 10)}),
   ];
-  public comment: Memo[] = [];
+  public comment: Comment[] = [];
 
   public sum(): number {
     let sum = 0;

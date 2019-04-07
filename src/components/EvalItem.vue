@@ -25,7 +25,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import StretchableTextarea from './StretchableTextarea.vue';
 import Evaluation from '../ts/evaluation';
-import Memo from '../ts/memo';
+import Comment from '../ts/comment';
 
 @Component({
   components: {
@@ -36,7 +36,7 @@ export default class EvalItem extends Vue {
   @Prop() public model!: Evaluation;
 
   private addComment(index: number): void {
-    this.model.comment.push(new Memo());
+    this.model.comment.push(new Comment());
   }
 }
 </script>
