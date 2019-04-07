@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <EvalList :model="model"></EvalList>
   </div>
 </template>
 
@@ -16,9 +17,16 @@ import Game from './ts/game';
   },
 })
 export default class App extends Vue {
+  private model: Evaluation[] = [];
+
   public mounted(): void {
     ServerSideDataManager.getGameList().then((res) => {
-      alert(res);
+      this.model = [];
+      res.forEach((game) => {
+        const ev = new Evaluation();
+        ev.game = game;
+        this.model.push(ev);
+      });
     }).catch((error) => {
       alert(error);
     });
