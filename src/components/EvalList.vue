@@ -8,23 +8,22 @@
           <th>合計</th>
         </tr>
       </thead>
-      <tbody v-for="(item, index) in model" :key="index">
-        <EvalItem :game="item.game" :items="item.evalItems"></EvalItem>
-        <EvalComment :model="item.comment"></EvalComment>
-      </tbody>
+      <EvalItem
+        v-for="(item, index) in model"
+        :key="index"
+        :model="item">
+      </EvalItem>
     </table>
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import EvalItem from './EvalItem.vue';
-import EvalComment from './EvalComment.vue';
 import Evaluation from '../ts/evaluation';
 
 @Component({
   components: {
     EvalItem,
-    EvalComment,
   },
 })
 export default class EvalList extends Vue {
