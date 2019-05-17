@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th v-for="item in header.evalItems" :key="item.key">{{ item.key }}</th>
-          <th>合計</th>
-        </tr>
-      </thead>
-      <EvalItem
-        v-for="(item, index) in model"
-        :key="index"
-        :model="item">
-      </EvalItem>
+  <table class="eval-list">
+    <thead class="eval-list__thead">
+      <tr class="eval-list__tr eval-list__header-color">
+        <th class="eval-list__tr__title eval-list__hidariue-color"></th>
+        <th v-for="item in header.evalItems" :key="item.key" class="eval-list__tr__eval-item">
+          {{ item.key }}
+        </th>
+        <th class="eval-list__tr__sum">合計</th>
+      </tr>
+    </thead>
+    <EvalItem
+      v-for="(item, index) in model"
+      :key="index"
+      :model="item">
+    </EvalItem>
     </table>
-  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
@@ -31,3 +31,48 @@ export default class EvalList extends Vue {
   private header: Evaluation = new Evaluation();
 }
 </script>
+
+<style lang="scss">
+.eval-list{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  &__thead{
+    display: flex;
+    position: sticky;
+    top: 0;
+  }
+  &__tbody{
+    display: flex;
+    flex-direction: column;
+  }
+  &__tr{
+    display: flex;
+    &__title{
+      display: flex;
+      width: 12em;
+    }
+    &__eval-item{
+      display: flex;
+      width: 4em;
+    }
+    &__sum{
+      display: flex;
+      width: 4em;
+    }
+    &__comment{
+      display: flex;
+      flex: 1;
+    }
+  }
+  &__header-color{
+    background-color: $col_header;
+  }
+  &__hidariue-color{
+    background-color: $col_hidariue;
+  }
+  &__normal-color{
+    background-color: $col_base;
+  }
+}
+</style>

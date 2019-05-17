@@ -1,21 +1,24 @@
 <template>
-<tbody>
-  <tr>
-    <th>{{ model.game.name }}</th>
-    <td v-for="item in model.evalItems" :key="item.key">
+<tbody class="eval-list__tbody eval-list__normal-color">
+  <tr class="eval-list__tr">
+    <th class="eval-list__tr__title eval-list__header-color">
+      {{ model.game.name }}
+    </th>
+    <td v-for="item in model.evalItems" :key="item.key" class="eval-list__tr__eval-item">
       <select v-model="item.value">
         <option v-for="i in item.option" :key="i" :value="i" :selected="i === item.value">
           {{ i }}
         </option>
       </select>
     </td>
-    <td>
+    <td class="eval-list__tr__sum">
       <span>{{ sum() }}</span>
     </td>
   </tr>
-  <tr>
-    <th></th>
-    <td colspan="7">
+  <tr class="eval-list__tr">
+    <th class="eval-list__tr__title eval-list__header-color">
+    </th>
+    <td class="eval-list__tr__comment">
       <ul>
         <li v-for="(c, index) in model.comment" :key="index">
           <span>{{ c.timestamp | asDate }}</span>

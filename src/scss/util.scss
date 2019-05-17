@@ -1,0 +1,17 @@
+$col_base: rgb(249, 248, 255);
+$col_header: rgb(222, 219, 250);
+$col_hidariue: rgb(200, 196, 240);
+
+* {
+  box-sizing: border-box;
+}
+html,body{
+  padding: 0;
+  margin: 0;
+  background-color: $col_base;
+}
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

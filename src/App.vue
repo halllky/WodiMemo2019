@@ -33,3 +33,11 @@ export default class App extends Vue {
   }
 }
 </script>
+
+<style lang="scss">
+#app{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50vh;
+}
+</style>
