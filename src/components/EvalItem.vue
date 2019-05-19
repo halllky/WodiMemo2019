@@ -21,8 +21,9 @@
     <td class="eval-list__tr__comment">
       <ul>
         <li v-for="(c, index) in model.comment" :key="index">
-          <span>{{ c.timestamp | asDate }}</span>
           <StretchableTextarea v-model="c.text"></StretchableTextarea>
+          <span>{{ c.timestamp | asDate }}</span>
+          <a @click="removeComment(c)">del</a>
         </li>
         <li>
           <a @click="addComment">add</a>
@@ -55,6 +56,13 @@ export default class EvalItem extends Vue {
   }
   private addComment(index: number): void {
     this.model.comment.push(new Comment());
+  }
+  private removeComment(cmt: Comment) {
+    if (cmt.text.length) {
+      const txt = cmt.text.slice(0, 11) + (cmt.text.length > 11 ? '...' : '');
+      if (!confirm(`コメントを削除しますか？\n「${txt}」`)) { return; }
+    }
+    this.model.comment = this.model.comment.filter((c) => c !== cmt);
   }
 }
 </script>
