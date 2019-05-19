@@ -40,6 +40,9 @@ export default class EvalList extends Vue {
   display: flex;
   flex-direction: column;
   position: relative;
+  background-color: $col_base;
+  border-left: 1px solid $col_hidariue;
+  border-top: 1px solid $col_hidariue;
   &__thead{
     display: flex;
     position: sticky;
@@ -76,6 +79,13 @@ export default class EvalList extends Vue {
   }
   &__normal-color{
     background-color: $col_base;
+  }
+  & th,td{
+    border-right: 1px solid $col_hidariue;
+    border-bottom: 1px solid $col_hidariue;
+  }
+  & td{
+    justify-content: center;
   }
 }
 </style>
