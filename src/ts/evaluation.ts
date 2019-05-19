@@ -30,5 +30,5 @@ export default class Evaluation {
     new EvalItem({ key: '遊びやすさ', value: 1, option: Range.of(1, 10)}),
     new EvalItem({ key: 'その他', value: 1, option: Range.of(0, 10)}),
   ];
-  public comment: Comment[] = [];
+  public comment: Comment = new Comment();
 }

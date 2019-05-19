@@ -1,37 +1,22 @@
 <template>
-<tbody class="eval-list__tbody eval-list__normal-color">
-  <tr class="eval-list__tr">
-    <th class="eval-list__tr__title eval-list__header-color">
-      {{ model.game.name }}
-    </th>
-    <td v-for="item in model.evalItems" :key="item.key" class="eval-list__tr__eval-item">
-      <select v-model="item.value">
-        <option v-for="i in item.option" :key="i" :value="i" :selected="i === item.value">
-          {{ i }}
-        </option>
-      </select>
-    </td>
-    <td class="eval-list__tr__sum">
-      <span>{{ sum() }}</span>
-    </td>
-  </tr>
-  <tr class="eval-list__tr">
-    <th class="eval-list__tr__title eval-list__header-color">
-    </th>
-    <td class="eval-list__tr__comment">
-      <ul>
-        <li v-for="(c, index) in model.comment" :key="index">
-          <StretchableTextarea v-model="c.text"></StretchableTextarea>
-          <span>{{ c.timestamp | asDate }}</span>
-          <a @click="removeComment(c)">del</a>
-        </li>
-        <li>
-          <a @click="addComment">add</a>
-        </li>
-      </ul>
-    </td>
-  </tr>
-</tbody>
+<tr class="eval-list__tr">
+  <th class="eval-list__tr__title eval-list__header-color">
+    {{ model.game.name }}
+  </th>
+  <td v-for="item in model.evalItems" :key="item.key" class="eval-list__tr__eval-item">
+    <select v-model="item.value">
+      <option v-for="i in item.option" :key="i" :value="i" :selected="i === item.value">
+        {{ i }}
+      </option>
+    </select>
+  </td>
+  <td class="eval-list__tr__sum">
+    <span>{{ sum() }}</span>
+  </td>
+  <td class="eval-list__tr__comment">
+    <StretchableTextarea v-model="model.comment.text"></StretchableTextarea>
+  </td>
+</tr>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
@@ -53,16 +38,6 @@ export default class EvalItem extends Vue {
     let sum = 0;
     this.model.evalItems.forEach((item) => sum += item.value);
     return sum;
-  }
-  private addComment(index: number): void {
-    this.model.comment.push(new Comment());
-  }
-  private removeComment(cmt: Comment) {
-    if (cmt.text.length) {
-      const txt = cmt.text.slice(0, 11) + (cmt.text.length > 11 ? '...' : '');
-      if (!confirm(`コメントを削除しますか？\n「${txt}」`)) { return; }
-    }
-    this.model.comment = this.model.comment.filter((c) => c !== cmt);
   }
 }
 </script>

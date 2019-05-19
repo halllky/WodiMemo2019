@@ -7,13 +7,16 @@
           {{ item.key }}
         </th>
         <th class="eval-list__tr__sum">合計</th>
+        <th class="eval-list__tr__comment">コメント</th>
       </tr>
     </thead>
-    <EvalItem
-      v-for="(item, index) in model"
-      :key="index"
-      :model="item">
-    </EvalItem>
+    <tbody class="eval-list__tbody">
+      <EvalItem
+        v-for="(item, index) in model"
+        :key="index"
+        :model="item">
+      </EvalItem>
+    </tbody>
     </table>
 </template>
 <script lang="ts">
@@ -62,7 +65,7 @@ export default class EvalList extends Vue {
     }
     &__comment{
       display: flex;
-      flex: 1;
+      width: 20em;
     }
   }
   &__header-color{
