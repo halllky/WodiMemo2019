@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-    <div style="width: 100%; height: 50vh;">
+    <div style="width: 100%; flex: 1; overflow-y: scroll; display: flex; justify-content: center;">
+      <EvalList :model="model"></EvalList>
+    </div>
+    <div style="flex: 1; width: 100%;">
       <LineChart
         :chartData="chartData"
         :chartOptions="chartOptions"
       ></LineChart>
     </div>
-    <EvalList :model="model"></EvalList>
   </div>
 </template>
 
@@ -75,7 +77,7 @@ export default class App extends Vue {
       maintainAspectRatio: false,
       scales: {
         xAxes: [
-          { ticks: { autoSkip: false, maxRotation: 45, minRotation: 45 } },
+          { ticks: { autoSkip: false, maxRotation: 15, minRotation: 15 } },
         ],
         yAxes: [
           { ticks: { beginAtZero: true, min: 0, max: 10 } },
@@ -104,6 +106,7 @@ export default class App extends Vue {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 50vh;
+  width: 100%;
+  height: 100%;
 }
 </style>
