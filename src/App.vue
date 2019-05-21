@@ -28,19 +28,20 @@ import LineChart from './components/LineChart.vue';
 })
 export default class App extends Vue {
   private model: Evaluation[] = [];
+  private get visibleModel() { return this.model.filter((e) => e.visible); }
   private get chartData(): Chart.ChartData {
     return {
-      labels: this.model.map((m) => m.game.name),
+      labels: this.visibleModel.map((m) => m.game.name),
       datasets: [
         {
           label: '熱中度',
-          data: this.model.map((m) => m.evalItems[0].value),
+          data: this.visibleModel.map((m) => m.evalItems[0].value),
           backgroundColor: ['rgba(242, 95, 62, 0.1)'],
           borderColor: ['rgba(242, 95, 62, 10.8)'],
         },
         {
           label: '斬新さ',
-          data: this.model.map((m) => m.evalItems[1].value),
+          data: this.visibleModel.map((m) => m.evalItems[1].value),
           backgroundColor: ['rgba(62, 185, 242, 0.1)'],
           borderColor: ['rgba(62, 185, 242, 10.8)'],
         },
@@ -52,19 +53,19 @@ export default class App extends Vue {
         },
         {
           label: '画像・音声',
-          data: this.model.map((m) => m.evalItems[3].value),
+          data: this.visibleModel.map((m) => m.evalItems[3].value),
           backgroundColor: ['rgba(130, 201, 108, 0.1)'],
           borderColor: ['rgba(130, 201, 108, 10.8)'],
         },
         {
           label: '遊びやすさ',
-          data: this.model.map((m) => m.evalItems[4].value),
+          data: this.visibleModel.map((m) => m.evalItems[4].value),
           backgroundColor: ['rgba(233, 131, 247, 0.1)'],
           borderColor: ['rgba(233, 131, 247, 10.8)'],
         },
         {
           label: 'その他',
-          data: this.model.map((m) => m.evalItems[5].value),
+          data: this.visibleModel.map((m) => m.evalItems[5].value),
           backgroundColor: ['rgba(0, 0, 0, 0.1)'],
           borderColor: ['rgba(0, 0, 0, 10.8)'],
         },

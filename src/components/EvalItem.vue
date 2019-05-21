@@ -16,6 +16,11 @@
   <td class="eval-list__tr__comment">
     <StretchableTextarea v-model="model.comment.text"></StretchableTextarea>
   </td>
+  <th class="eval-list__tr__visible">
+    <label style="width: 100%; height: 100%;">
+      <input type="checkbox" v-model="model.visible">
+    </label>
+  </th>
 </tr>
 </template>
 <script lang="ts">

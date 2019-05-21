@@ -8,6 +8,12 @@
         </th>
         <th class="eval-list__tr__sum">合計</th>
         <th class="eval-list__tr__comment">コメント</th>
+        <th class="eval-list__tr__visible">
+          <label style="width: 100%; height: 100%;">
+            <input type="checkbox" :checked="isAllItemsVisible" @input="switchVisible">
+            グラフに表示
+          </label>
+        </th>
       </tr>
     </thead>
     <tbody class="eval-list__tbody">
@@ -32,6 +38,14 @@ import Evaluation from '../ts/evaluation';
 export default class EvalList extends Vue {
   @Prop() public model!: Evaluation[];
   private header: Evaluation = new Evaluation();
+  private get isAllItemsVisible() { return this.model.some((m) => m.visible); }
+  private switchVisible() {
+    if (this.model.some((m) => m.visible)) {
+      this.model.forEach((m) => m.visible = false);
+    } else {
+      this.model.forEach((m) => m.visible = true);
+    }
+  }
 }
 </script>
 
@@ -69,6 +83,11 @@ export default class EvalList extends Vue {
     &__comment{
       display: flex;
       width: 20em;
+    }
+    &__visible{
+      display: flex;
+      justify-content: center;
+      width: 5em;
     }
   }
   &__header-color{
