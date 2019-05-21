@@ -3,10 +3,14 @@
     <thead class="eval-list__thead">
       <tr class="eval-list__tr eval-list__header-color">
         <th class="eval-list__tr__title eval-list__hidariue-color"></th>
-        <th v-for="item in header.evalItems" :key="item.key" class="eval-list__tr__eval-item">
-          {{ item.key }}
+        <th v-for="item in header.evalItems" :key="item.key"
+          class="eval-list__tr__eval-item"
+          @click="sort(item.key)">
+            {{ item.key }}
         </th>
-        <th class="eval-list__tr__sum">合計</th>
+        <th class="eval-list__tr__sum" @click="sort('合計')">
+          合計
+        </th>
         <th class="eval-list__tr__comment">コメント</th>
         <th class="eval-list__tr__visible">
           <label style="width: 100%; height: 100%;">
@@ -26,7 +30,7 @@
     </table>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Emit, Vue } from 'vue-property-decorator';
 import EvalItem from './EvalItem.vue';
 import Evaluation from '../ts/evaluation';
 
@@ -39,6 +43,7 @@ export default class EvalList extends Vue {
   @Prop() public model!: Evaluation[];
   private header: Evaluation = new Evaluation();
   private get isAllItemsVisible() { return this.model.some((m) => m.visible); }
+  @Emit() public sort(key: string) {/* */}
   private switchVisible() {
     if (this.model.some((m) => m.visible)) {
       this.model.forEach((m) => m.visible = false);

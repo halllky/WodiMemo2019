@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div style="width: 100%; flex: 1; overflow-y: scroll; display: flex; justify-content: center;">
-      <EvalList :model="model"></EvalList>
+      <EvalList :model="model" @sort="sort"></EvalList>
     </div>
     <div style="flex: 1; width: 100%;">
       <LineChart
@@ -28,6 +28,7 @@ import LineChart from './components/LineChart.vue';
 })
 export default class App extends Vue {
   private model: Evaluation[] = [];
+  private isAsc: boolean = false;
   private get visibleModel() { return this.model.filter((e) => e.visible); }
   private get chartData(): Chart.ChartData {
     return {
@@ -85,6 +86,32 @@ export default class App extends Vue {
         ],
       },
     };
+  }
+
+  public sort(key: string) {
+    this.isAsc = !this.isAsc;
+    this.model = this.model.sort((a, b) => {
+      if (key === '合計') {
+        const aSum = a.evalItems.map((e) => e.value).reduce((prev, curr) => prev + curr);
+        const bSum = b.evalItems.map((e) => e.value).reduce((prev, curr) => prev + curr);
+        if (aSum === bSum) {
+          return 0;
+        } else if (aSum < bSum) {
+          return this.isAsc ? 1 : -1;
+        } else {
+          return this.isAsc ? -1 : 1;
+        }
+      }
+      const aa = a.evalItems.find((e) => e.key === key);
+      const bb = b.evalItems.find((e) => e.key === key);
+      if (!aa || !bb || aa.value === bb.value) {
+        return 0;
+      } else if (aa.value < bb.value) {
+        return this.isAsc ? 1 : -1;
+      } else {
+        return this.isAsc ? -1 : 1;
+      }
+    });
   }
 
   public mounted(): void {
