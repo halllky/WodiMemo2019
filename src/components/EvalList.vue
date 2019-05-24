@@ -4,12 +4,12 @@
       <tr class="eval-list__tr eval-list__header-color">
         <th class="eval-list__tr__title eval-list__hidariue-color"></th>
         <th v-for="item in header.evalItems" :key="item.key"
-          class="eval-list__tr__eval-item"
+          class="eval-list__tr__eval-item eval-list__header"
           @click="sort(item.key)">
-            {{ item.key }}
+            <a v-text="item.key" class="eval-list__header__text"></a>
         </th>
-        <th class="eval-list__tr__sum" @click="sort('合計')">
-          合計
+        <th class="eval-list__tr__sum eval-list__header" @click="sort('合計')">
+          <a class="eval-list__header__text">合計</a>
         </th>
         <th class="eval-list__tr__comment">コメント</th>
         <th class="eval-list__tr__visible">
@@ -103,6 +103,17 @@ export default class EvalList extends Vue {
   }
   &__normal-color{
     background-color: $col_base;
+  }
+  &__header{
+    justify-content: center;
+    align-items: center;
+    &:hover{
+      color: darken($color: $col_header, $amount: 30);
+      cursor: pointer;
+    }
+    &__text{
+      text-decoration: underline;
+    }
   }
   & th,td{
     border-right: 1px solid $col_hidariue;
