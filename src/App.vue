@@ -20,6 +20,7 @@ import ServerSideDataManager from './ts/server-side-data-manager';
 import Game from './ts/game';
 import MyStorage from './ts/my-storage';
 import LineChart from './components/LineChart.vue';
+import * as firebase from './ts/firebase-config';
 
 @Component({
   components: {
@@ -116,6 +117,12 @@ export default class App extends Vue {
   }
 
   public mounted(): void {
+    const fb = firebase.default.connect().firestore();
+    fb.collection('users').get().then((snapshot) => {
+      snapshot.forEach((doc) => {
+        alert(JSON.stringify(doc.data()));
+      });
+    });
     ServerSideDataManager.getGameList().then((res) => {
       this.model = [];
       res.forEach((game) => {
