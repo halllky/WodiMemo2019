@@ -4,7 +4,7 @@
     {{ model.game.name }}
   </th>
   <td v-for="item in model.evalItems" :key="item.key" class="eval-list__tr__eval-item">
-    <select v-model="item.value">
+    <select v-model="item.value" @change="$store.state.storage.save(model)">
       <option v-for="i in item.option" :key="i" :value="i" :selected="i === item.value">
         {{ i }}
       </option>
@@ -14,7 +14,10 @@
     <span>{{ sum() }}</span>
   </td>
   <td class="eval-list__tr__comment">
-    <StretchableTextarea v-model="model.comment.text"></StretchableTextarea>
+    <StretchableTextarea
+      v-model="model.comment.text"
+      @input="$store.state.storage.save(model)"
+    ></StretchableTextarea>
   </td>
 </tr>
 </template>
