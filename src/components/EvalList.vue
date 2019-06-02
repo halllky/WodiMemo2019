@@ -3,11 +3,21 @@
     <thead class="eval-list__thead">
       <tr class="eval-list__tr eval-list__header-color">
         <th class="eval-list__tr__title eval-list__hidariue-color"></th>
-        <th v-for="item in header.evalItems" :key="item.key" class="eval-list__tr__eval-item">
-          {{ item.key }}
+        <th v-for="item in header.evalItems" :key="item.key"
+          class="eval-list__tr__eval-item eval-list__header"
+          @click="sort(item.key)">
+            <a v-text="item.key" class="eval-list__header__text"></a>
         </th>
-        <th class="eval-list__tr__sum">合計</th>
+        <th class="eval-list__tr__sum eval-list__header" @click="sort('合計')">
+          <a class="eval-list__header__text">合計</a>
+        </th>
         <th class="eval-list__tr__comment">コメント</th>
+        <th class="eval-list__tr__visible">
+          <label style="width: 100%; height: 100%;">
+            <input type="checkbox" :checked="isAllItemsVisible" @input="switchVisible">
+            グラフに表示
+          </label>
+        </th>
       </tr>
     </thead>
     <tbody class="eval-list__tbody">
@@ -20,7 +30,7 @@
     </table>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Emit, Vue } from 'vue-property-decorator';
 import EvalItem from './EvalItem.vue';
 import Evaluation from '../ts/evaluation';
 
@@ -32,6 +42,15 @@ import Evaluation from '../ts/evaluation';
 export default class EvalList extends Vue {
   @Prop() public model!: Evaluation[];
   private header: Evaluation = new Evaluation();
+  private get isAllItemsVisible() { return this.model.some((m) => m.visible); }
+  @Emit() public sort(key: string) {/* */}
+  private switchVisible() {
+    if (this.model.some((m) => m.visible)) {
+      this.model.forEach((m) => m.visible = false);
+    } else {
+      this.model.forEach((m) => m.visible = true);
+    }
+  }
 }
 </script>
 
@@ -70,6 +89,11 @@ export default class EvalList extends Vue {
       display: flex;
       width: 20em;
     }
+    &__visible{
+      display: flex;
+      justify-content: center;
+      width: 5em;
+    }
   }
   &__header-color{
     background-color: $col_header;
@@ -79,6 +103,17 @@ export default class EvalList extends Vue {
   }
   &__normal-color{
     background-color: $col_base;
+  }
+  &__header{
+    justify-content: center;
+    align-items: center;
+    &:hover{
+      color: darken($color: $col_header, $amount: 30);
+      cursor: pointer;
+    }
+    &__text{
+      text-decoration: underline;
+    }
   }
   & th,td{
     border-right: 1px solid $col_hidariue;

@@ -31,6 +31,7 @@ export default class Evaluation {
     new EvalItem({ key: 'その他', value: 1, option: Range.of(0, 10)}),
   ];
   public comment: Comment = new Comment();
+  public visible: boolean = true;
 
   public toJson(): string {
     return JSON.stringify(this);
